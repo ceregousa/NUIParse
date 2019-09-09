@@ -23,11 +23,11 @@
 - (NSSet *)lr1Closure:(NSSet *)i;
 - (NSSet *)lr1GotoKernelWithItems:(NSSet *)i symbol:(NUIPGrammarSymbol *)symbol;
 
-- (NSSet *)follow:(NSString *)name;
+- (NSSet *)follow:(NSString *)CERName;
 - (NSSet *)first:(NSArray *)obj;
 
-- (NSString *)uniqueSymbolNameBasedOnName:(NSString *)name;
-- (NSString *)symbolNameNotInSet:(NSSet *)symbols basedOnName:(NSString *)name;
+- (NSString *)uniqueSymbolNameBasedOnName:(NSString *)CERName;
+- (NSString *)symbolNameNotInSet:(NSSet *)symbols basedOnName:(NSString *)CERName;
 
 - (NSArray *)tidyRightHandSides:(NSArray *)oldRules error:(NSError **)error;
 - (NSSet *)collectRHSElementsForNewRules:(NSArray *)rightHandSide;

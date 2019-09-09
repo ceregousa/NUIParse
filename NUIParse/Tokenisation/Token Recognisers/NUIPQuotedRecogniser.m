@@ -44,7 +44,7 @@
         [self setEndQuote:initEndQuote];
         [self setEscapeSequence:initEscapeSequence];
         [self setMaximumLength:initMaximumLength];
-        [self setName:initName];
+        [self setCERName:initName];
     }
     
     return self;
@@ -74,7 +74,7 @@
             NSLog(@"Warning, value for maximum length too long for this platform, allowing infinite lengths");
             [self setMaximumLength:NSNotFound];
         }
-        [self setName:[aDecoder decodeObjectForKey:NUIPQuotedRecogniserNameKey]];
+        [self setCERName:[aDecoder decodeObjectForKey:NUIPQuotedRecogniserNameKey]];
     }
     
     return self;

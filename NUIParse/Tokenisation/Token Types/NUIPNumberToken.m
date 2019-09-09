@@ -45,7 +45,7 @@
     return [NSString stringWithFormat:@"<Number: %@>", [self number]];
 }
 
-- (NSString *)name
+- (NSString *)CERName
 {
     return @"Number";
 }

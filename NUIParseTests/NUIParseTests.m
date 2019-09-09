@@ -77,11 +77,11 @@
     [mapCssTokeniser addTokenRecogniser:[NUIPKeywordRecogniser recogniserForKeyword:@":"]];
     [mapCssTokeniser addTokenRecogniser:[NUIPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     [mapCssTokeniser addTokenRecogniser:[NUIPNumberRecogniser numberRecogniser]];
-    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
-    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" name:@"Comment"]];
-    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/"  endQuote:@"/"  escapeSequence:@"\\" name:@"Regex"]];
-    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"'"  endQuote:@"'"  escapeSequence:@"\\" name:@"String"]];
-    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
+    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" CERName:@"Comment"]];
+    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"//" endQuote:@"\n" CERName:@"Comment"]];
+    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/"  endQuote:@"/"  escapeSequence:@"\\" CERName:@"Regex"]];
+    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"'"  endQuote:@"'"  escapeSequence:@"\\" CERName:@"String"]];
+    [mapCssTokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" CERName:@"String"]];
     [mapCssTokeniser addTokenRecogniser:[NUIPIdentifierRecogniser identifierRecogniserWithInitialCharacters:initialIdCharacters identifierCharacters:identifierCharacters]];
     [mapCssTokeniser setDelegate:[[[NUIPTestMapCSSTokenisingDelegate alloc] init] autorelease]];
     
@@ -221,26 +221,26 @@
 - (void)testQuotedTokeniser
 {
     NUIPTokeniser *tokeniser = [[[NUIPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" CERName:@"Comment"]];
     NUIPTokenStream *tokenStream = [tokeniser tokenise:@"/* abcde ghi */"];
-    NUIPTokenStream *expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abcde ghi " quotedWith:@"/*" name:@"Comment"], [NUIPEOFToken eof], nil]];
+    NUIPTokenStream *expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abcde ghi " quotedWith:@"/*" CERName:@"Comment"], [NUIPEOFToken eof], nil]];
     STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise comment", nil);
     
-    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
+    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" CERName:@"String"]];
     tokenStream = [tokeniser tokenise:@"/* abc */\"def\""];
-    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abc " quotedWith:@"/*" name:@"Comment"], [NUIPQuotedToken content:@"def" quotedWith:@"\"" name:@"String"], [NUIPEOFToken eof], nil]];
+    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abc " quotedWith:@"/*" CERName:@"Comment"], [NUIPQuotedToken content:@"def" quotedWith:@"\"" CERName:@"String"], [NUIPEOFToken eof], nil]];
     STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise comment and string", nil);
     
     tokenStream = [tokeniser tokenise:@"\"def\\\"\""];
-    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"def\"" quotedWith:@"\"" name:@"String"], [NUIPEOFToken eof], nil]];
+    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"def\"" quotedWith:@"\"" CERName:@"String"], [NUIPEOFToken eof], nil]];
     STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise string with quote in it", nil);
     
     tokenStream = [tokeniser tokenise:@"\"def\\\\\""];
-    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"def\\" quotedWith:@"\"" name:@"String"], [NUIPEOFToken eof], nil]];
+    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"def\\" quotedWith:@"\"" CERName:@"String"], [NUIPEOFToken eof], nil]];
     STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to tokenise string with backslash in it", nil);
 
     tokeniser = [[[NUIPTokeniser alloc] init] autorelease];
-    NUIPQuotedRecogniser *rec = [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"];
+    NUIPQuotedRecogniser *rec = [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" CERName:@"String"];
     [rec setEscapeReplacer:^ NSString * (NSString *str, NSUInteger *loc)
      {
          if ([str length] > *loc)
@@ -270,34 +270,34 @@
      }];
     [tokeniser addTokenRecogniser:rec];
     tokenStream = [tokeniser tokenise:@"\"\\n\\r\\f\""];
-    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"\n\r\f" quotedWith:@"\"" name:@"String"], [NUIPEOFToken eof], nil]];
+    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"\n\r\f" quotedWith:@"\"" CERName:@"String"], [NUIPEOFToken eof], nil]];
     STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to correctly tokenise string with recognised escape chars", nil);
     
     tokeniser = [[[NUIPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:nil maximumLength:1 name:@"Character"]];
+    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:nil maximumLength:1 CERName:@"Character"]];
     tokenStream = [tokeniser tokenise:@"'a''bc'"];
-    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"a" quotedWith:@"'" name:@"Character"], [NUIPErrorToken errorWithMessage:nil], nil]];
+    expectdTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@"a" quotedWith:@"'" CERName:@"Character"], [NUIPErrorToken errorWithMessage:nil], nil]];
     STAssertEqualObjects(tokenStream, expectdTokenStream, @"Failed to correctly tokenise characters", nil);
 }
 
 - (void)testTokeniserError
 {
     NUIPTokeniser *tokeniser = [[[NUIPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" CERName:@"Comment"]];
     NUIPTokenStream *tokenStream = [tokeniser tokenise:@"/* abcde ghi */ abc /* def */"];
-    NUIPTokenStream *expectedTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abcde ghi " quotedWith:@"/*" name:@"Comment"], [NUIPErrorToken errorWithMessage:nil], nil]];
+    NUIPTokenStream *expectedTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abcde ghi " quotedWith:@"/*" CERName:@"Comment"], [NUIPErrorToken errorWithMessage:nil], nil]];
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Inserting error token and bailing failed", nil);
     
     [tokeniser setDelegate:[[[NUIPTestErrorHandlingDelegate alloc] init] autorelease]];
     tokenStream = [tokeniser tokenise:@"/* abcde ghi */ abc /* def */"];
-    expectedTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abcde ghi " quotedWith:@"/*" name:@"Comment"], [NUIPErrorToken errorWithMessage:nil], [NUIPQuotedToken content:@" def " quotedWith:@"/*" name:@"Comment"], [NUIPEOFToken eof], nil]];
+    expectedTokenStream = [NUIPTokenStream tokenStreamWithTokens:[NSArray arrayWithObjects:[NUIPQuotedToken content:@" abcde ghi " quotedWith:@"/*" CERName:@"Comment"], [NUIPErrorToken errorWithMessage:nil], [NUIPQuotedToken content:@" def " quotedWith:@"/*" CERName:@"Comment"], [NUIPEOFToken eof], nil]];
     STAssertEqualObjects(tokenStream, expectedTokenStream, @"Inserting error token and continuing according to delegate failed.", nil);
 }
 
 - (void)testTokenLineColumnNumbers
 {
     NUIPTokeniser *tokeniser = [[[NUIPTokeniser alloc] init] autorelease];
-    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" name:@"Comment"]];
+    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"/*" endQuote:@"*/" CERName:@"Comment"]];
     [tokeniser addTokenRecogniser:[NUIPKeywordRecogniser recogniserForKeyword:@"long"]];
     [tokeniser addTokenRecogniser:[NUIPIdentifierRecogniser identifierRecogniser]];
     [tokeniser addTokenRecogniser:[NUIPWhiteSpaceRecogniser whiteSpaceRecogniser]];
@@ -326,7 +326,7 @@
                                                                                [NUIPKeywordToken tokenWithKeyword:@"["],
                                                                                [NUIPIdentifierToken tokenWithIdentifier:@"highway"],
                                                                                [NUIPKeywordToken tokenWithKeyword:@"="],
-                                                                               [NUIPQuotedToken content:@"trunk" quotedWith:@"\"" name:@"String"],
+                                                                               [NUIPQuotedToken content:@"trunk" quotedWith:@"\"" CERName:@"String"],
                                                                                [NUIPKeywordToken tokenWithKeyword:@"]"],
                                                                                [NUIPKeywordToken tokenWithKeyword:@"{"],
                                                                                [NUIPIdentifierToken tokenWithIdentifier:@"line-width"],
@@ -344,7 +344,7 @@
                                                                                [NUIPKeywordToken tokenWithKeyword:@"["],
                                                                                [NUIPIdentifierToken tokenWithIdentifier:@"type"],
                                                                                [NUIPKeywordToken tokenWithKeyword:@"="],
-                                                                               [NUIPQuotedToken content:@"multipolygon" quotedWith:@"\"" name:@"String"],
+                                                                               [NUIPQuotedToken content:@"multipolygon" quotedWith:@"\"" CERName:@"String"],
                                                                                [NUIPKeywordToken tokenWithKeyword:@"]"],
                                                                                [NUIPKeywordToken tokenWithKeyword:@"{"],
                                                                                [NUIPIdentifierToken tokenWithIdentifier:@"line-width"],

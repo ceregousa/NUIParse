@@ -49,7 +49,7 @@
     return [NSString stringWithFormat:@"<Identifier: %@>", [self identifier]];
 }
 
-- (NSString *)name
+- (NSString *)CERName
 {
     return @"Identifier";
 }

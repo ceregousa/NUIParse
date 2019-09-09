@@ -65,7 +65,7 @@ static char followCacheKey;
     return [[[self allRules] allObjects] sortedArrayUsingComparator:^ NSComparisonResult (NUIPRule *r1, NUIPRule *r2)
             {
                 NSComparisonResult t = [r1 tag] < [r2 tag] ? NSOrderedDescending : [r1 tag] > [r2 tag] ? NSOrderedAscending: NSOrderedSame;
-                NSComparisonResult r = NSOrderedSame != t ? t : [[r1 name] compare:[r2 name]];
+                NSComparisonResult r = NSOrderedSame != t ? t : [[r1 CERName] compare:[r2 CERName]];
                 return NSOrderedSame != r ? r : ([[r1 rightHandSideElements] count] < [[r2 rightHandSideElements] count] ? NSOrderedAscending : ([[r1 rightHandSideElements] count] > [[r2 rightHandSideElements] count] ? NSOrderedDescending : NSOrderedSame));
             }];
     
@@ -73,15 +73,15 @@ static char followCacheKey;
 
 - (NSSet *)firstSymbol:(NUIPGrammarSymbol *)sym
 {
-    NSString *name = [sym name];
-    if ([sym isTerminal] && nil != name)
+    NSString *CERName = [sym CERName];
+    if ([sym isTerminal] && nil != CERName)
     {
-        return [NSSet setWithObject:name];
+        return [NSSet setWithObject:CERName];
     }
     else
     {
         NSMutableSet *f = [NSMutableSet set];
-        NSArray *rs = [self rulesForNonTerminalWithName:name];
+        NSArray *rs = [self rulesForNonTerminalWithName:CERName];
         BOOL containsEmptyRightHandSide = NO;
         for (NUIPRule *rule in rs)
         {
@@ -126,12 +126,12 @@ static char followCacheKey;
     
     for (NUIPRule *rule in rules)
     {
-        [symbols addObject:[rule name]];
+        [symbols addObject:[rule CERName]];
         for (id sym in [rule rightHandSideElements])
         {
             if ([sym isGrammarSymbol])
             {
-                [symbols addObject:[sym name]];
+                [symbols addObject:[sym CERName]];
             }
         }
     }

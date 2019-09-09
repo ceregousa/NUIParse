@@ -45,7 +45,7 @@
     return [NSString stringWithFormat:@"<Keyword: %@>", [self keyword]];
 }
 
-- (NSString *)name
+- (NSString *)CERName
 {
     return [self keyword];
 }

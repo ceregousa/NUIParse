@@ -37,20 +37,20 @@
 
 - (BOOL)tokeniser:(NUIPTokeniser *)tokeniser shouldConsumeToken:(NUIPToken *)token
 {
-    NSString *name = [token name];
-    if ([name isEqualToString:@"{"] || [name isEqualToString:@"["])
+    NSString *CERName = [token CERName];
+    if ([CERName isEqualToString:@"{"] || [CERName isEqualToString:@"["])
     {
         nestingDepth++;
     }
-    else if ([name isEqualToString:@"}"] || [name isEqualToString:@"]"])
+    else if ([CERName isEqualToString:@"}"] || [CERName isEqualToString:@"]"])
     {
         nestingDepth--;
     }
-    else if ([name isEqualToString:@"|z"])
+    else if ([CERName isEqualToString:@"|z"])
     {
         inRange = YES;
     }
-    else if (inRange && ![token isNumberToken] && ![name isEqualToString:@"-"])
+    else if (inRange && ![token isNumberToken] && ![CERName isEqualToString:@"-"])
     {
         inRange = NO;
     }
@@ -60,7 +60,7 @@
     }
     else if ([token isKeywordToken])
     {
-        return 0 == nestingDepth || [symbolsSet characterIsMember:[name characterAtIndex:0]] || [name isEqualToString:@"eval"] || [name isEqualToString:@"url"] || [name isEqualToString:@"set"] || [name isEqualToString:@"pt"] || [name isEqualToString:@"px"];
+        return 0 == nestingDepth || [symbolsSet characterIsMember:[CERName characterAtIndex:0]] || [CERName isEqualToString:@"eval"] || [CERName isEqualToString:@"url"] || [CERName isEqualToString:@"set"] || [CERName isEqualToString:@"pt"] || [CERName isEqualToString:@"px"];
     }
     
     return YES;
@@ -77,11 +77,11 @@
     }
     else
     {
-        NSString *name = [token name];
-        justTokenisedObject = ([name isEqualToString:@"node"] || [name isEqualToString:@"way" ] || [name isEqualToString:@"relation"] ||
-                               [name isEqualToString:@"area"] || [name isEqualToString:@"line"] || [name isEqualToString:@"canvas"] || [name isEqualToString:@"*"]);
+        NSString *CERName = [token CERName];
+        justTokenisedObject = ([CERName isEqualToString:@"node"] || [CERName isEqualToString:@"way" ] || [CERName isEqualToString:@"relation"] ||
+                               [CERName isEqualToString:@"area"] || [CERName isEqualToString:@"line"] || [CERName isEqualToString:@"canvas"] || [CERName isEqualToString:@"*"]);
         
-        if (![name isEqualToString:@"Comment"])
+        if (![CERName isEqualToString:@"Comment"])
         {
             [stream pushToken:token];
         }

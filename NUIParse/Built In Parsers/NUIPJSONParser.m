@@ -36,7 +36,7 @@
     if (nil != self)
     {
         jsonTokeniser = [[NUIPTokeniser alloc] init];
-        NUIPQuotedRecogniser *stringRecogniser = [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"];
+        NUIPQuotedRecogniser *stringRecogniser = [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" CERName:@"String"];
         [stringRecogniser setEscapeReplacer:^ NSString * (NSString *str, NSUInteger *loc)
          {
              if ([str length] > *loc)

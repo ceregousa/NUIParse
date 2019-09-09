@@ -47,9 +47,9 @@
             NUIPGrammarSymbol *next = [item nextSymbol];
             if (nil == next)
             {
-                if ([[[item rule] name] isEqualToString:startSymbol])
+                if ([[[item rule] CERName] isEqualToString:startSymbol])
                 {
-                    BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
+                    BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction acceptAction] forState:idx CERName:@"EOF"];
                     if (!success)
                     {
                         return NO;
@@ -57,7 +57,7 @@
                 }
                 else
                 {
-                    BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
+                    BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction reduceAction:[item rule]] forState:idx CERName:[[item terminal] CERName]];
                     if (!success)
                     {
                         return NO;
@@ -68,7 +68,7 @@
             {
                 NSSet *g = [aug lr1GotoKernelWithItems:itemsSet symbol:next];
                 NSUInteger ix = [kernels indexOfObject:g];
-                BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction shiftAction:ix] forState:idx CERName:[next CERName]];
                 if (!success)
                 {
                     return NO;

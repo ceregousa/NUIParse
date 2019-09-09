@@ -15,7 +15,7 @@
     return [[[NUIPEOFToken alloc] init] autorelease];
 }
 
-- (NSString *)name
+- (NSString *)CERName
 {
     return @"EOF";
 }

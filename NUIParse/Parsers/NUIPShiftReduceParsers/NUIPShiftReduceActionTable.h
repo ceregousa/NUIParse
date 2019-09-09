@@ -18,7 +18,7 @@
 
 - (id)initWithCapacity:(NSUInteger)capacity;
 
-- (BOOL)setAction:(NUIPShiftReduceAction *)action forState:(NSUInteger)state name:(NSString *)token;
+- (BOOL)setAction:(NUIPShiftReduceAction *)action forState:(NSUInteger)state CERName:(NSString *)token;
 
 - (NUIPShiftReduceAction *)actionForState:(NSUInteger)state token:(NUIPToken *)token;
 - (NSSet *)acceptableTokenNamesForState:(NSUInteger)state;

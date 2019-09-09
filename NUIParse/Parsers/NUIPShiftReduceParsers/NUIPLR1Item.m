@@ -71,7 +71,7 @@
 
 - (NSString *)description
 {
-    return [[super description] stringByAppendingFormat:@", %@", [[self terminal] name]];
+    return [[super description] stringByAppendingFormat:@", %@", [[self terminal] CERName]];
 }
 
 @end

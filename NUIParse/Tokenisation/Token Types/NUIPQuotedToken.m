@@ -14,18 +14,18 @@
 @private
     NSString *content;
     NSString *quoteType;
-    NSString *name;
+    NSString *CERName;
 }
 
 @synthesize content;
 @synthesize quoteType;
 
-+ (id)content:(NSString *)content quotedWith:(NSString *)quoteType name:(NSString *)name
++ (id)content:(NSString *)content quotedWith:(NSString *)quoteType CERName:(NSString *)CERName
 {
-    return [[[NUIPQuotedToken alloc] initWithContent:content quoteType:quoteType name:name] autorelease];
+    return [[[NUIPQuotedToken alloc] initWithContent:content quoteType:quoteType CERName:CERName] autorelease];
 }
 
-- (id)initWithContent:(NSString *)initContent quoteType:(NSString *)initQuoteType name:(NSString *)initName
+- (id)initWithContent:(NSString *)initContent quoteType:(NSString *)initQuoteType CERName:(NSString *)initName
 {
     self = [super init];
     
@@ -33,7 +33,7 @@
     {
         [self setContent:initContent];
         [self setQuoteType:initQuoteType];
-        name = [initName copy];
+        CERName = [initName copy];
     }
     
     return self;
@@ -41,26 +41,26 @@
 
 - (id)init
 {
-    return [self initWithContent:@"" quoteType:@"" name:@""];
+    return [self initWithContent:@"" quoteType:@"" CERName:@""];
 }
 
 - (void)dealloc
 {
     [content release];
     [quoteType release];
-    [name release];
+    [CERName release];
     
     [super dealloc];
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %@>", [self name], [self content]];
+    return [NSString stringWithFormat:@"<%@: %@>", [self CERName], [self content]];
 }
 
-- (NSString *)name
+- (NSString *)CERName
 {
-    return name;
+    return CERName;
 }
 
 - (NSUInteger)hash
@@ -77,7 +77,7 @@
 {
     return ([object isQuotedToken] &&
             [((NUIPQuotedToken *)object)->content isEqualToString:content] &&
-            [((NUIPQuotedToken *)object)->name isEqualToString:name] &&
+            [((NUIPQuotedToken *)object)->CERName isEqualToString:CERName] &&
             [((NUIPQuotedToken *)object)->quoteType isEqualToString:quoteType]);
 }
 

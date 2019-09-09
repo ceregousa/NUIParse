@@ -36,7 +36,7 @@
     [super dealloc];
 }
 
-- (NSString *)name
+- (NSString *)CERName
 {
     return @"Error";
 }

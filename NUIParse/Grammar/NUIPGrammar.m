@@ -73,9 +73,9 @@
             NSMutableArray *rules = [NSMutableArray arrayWithCapacity:[arrs count]];
             for (NSArray *rhs in arrs)
             {
-                NSString *name = [(NUIPIdentifierToken *)[children objectAtIndex:0] identifier];
-                Class c = NSClassFromString(name);
-                NUIPRule *rule = nil == c || ![c conformsToProtocol:@protocol(NUIPParseResult)] ? [NUIPRule ruleWithName:name rightHandSideElements:rhs] : [NUIPRule ruleWithName:name rightHandSideElements:rhs representitiveClass:c];
+                NSString *CERName = [(NUIPIdentifierToken *)[children objectAtIndex:0] identifier];
+                Class c = NSClassFromString(CERName);
+                NUIPRule *rule = nil == c || ![c conformsToProtocol:@protocol(NUIPParseResult)] ? [NUIPRule ruleWithName:CERName rightHandSideElements:rhs] : [NUIPRule ruleWithName:CERName rightHandSideElements:rhs representitiveClass:c];
                 [rules addObject:rule];
             }
             return rules;
@@ -261,8 +261,8 @@
     [tokeniser addTokenRecogniser:[NUIPKeywordRecogniser recogniserForKeyword:@"|"]];
     [tokeniser addTokenRecogniser:[NUIPKeywordRecogniser recogniserForKeyword:@";"]];
     [tokeniser addTokenRecogniser:[NUIPNumberRecogniser integerRecogniser]];
-    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" name:@"String"]];
-    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:@"\\" name:@"String"]];
+    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"\"" endQuote:@"\"" escapeSequence:@"\\" CERName:@"String"]];
+    [tokeniser addTokenRecogniser:[NUIPQuotedRecogniser quotedRecogniserWithStartQuote:@"'" endQuote:@"'" escapeSequence:@"\\" CERName:@"String"]];
     [tokeniser addTokenRecogniser:[NUIPIdentifierRecogniser identifierRecogniser]];
     [tokeniser addTokenRecogniser:[NUIPWhiteSpaceRecogniser whiteSpaceRecogniser]];
     [tokeniser setDelegate:del];
@@ -385,19 +385,19 @@
     NSMutableSet *definedNonTerminals = [NSMutableSet setWithCapacity:[rules count]];
     for (NUIPRule *rule in rules)
     {
-        [definedNonTerminals addObject:[rule name]];
+        [definedNonTerminals addObject:[rule CERName]];
     }
     
     for (NUIPRule *rule in rules)
     {
         for (id item in [rule rightHandSideElements])
         {
-            if ([item isGrammarSymbol] && ![(NUIPGrammarSymbol *)item isTerminal] && ![definedNonTerminals containsObject:[(NUIPGrammarSymbol *)item name]])
+            if ([item isGrammarSymbol] && ![(NUIPGrammarSymbol *)item isTerminal] && ![definedNonTerminals containsObject:[(NUIPGrammarSymbol *)item CERName]])
             {
                 return [NSError errorWithDomain:NUIPEBNFParserErrorDomain
                                            code:NUIPErrorCodeUndefinedNonTerminal
                                        userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                 [NSString stringWithFormat:@"Could not find definition of %@, used in %@", [item name], rule], NSLocalizedDescriptionKey,
+                                                 [NSString stringWithFormat:@"Could not find definition of %@, used in %@", [item CERName], rule], NSLocalizedDescriptionKey,
                                                  nil]];
             }
             else if ([item isRHSItem])
@@ -428,11 +428,11 @@
 - (void)addRule:(NUIPRule *)rule
 {
     NSMutableDictionary *rs = [self rulesByNonTerminal];
-    NSMutableArray *arr = [rs objectForKey:[rule name]];
+    NSMutableArray *arr = [rs objectForKey:[rule CERName]];
     if (nil == arr)
     {
         arr = [NSMutableArray array];
-        [rs setObject:arr forKey:[rule name]];
+        [rs setObject:arr forKey:[rule CERName]];
     }
     [arr addObject:rule];
 }

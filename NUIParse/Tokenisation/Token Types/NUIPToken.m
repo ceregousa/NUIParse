@@ -15,7 +15,7 @@
 @synthesize characterNumber;
 @synthesize length;
 
-- (NSString *)name
+- (NSString *)CERName
 {
     [NSException raise:@"Abstract method called exception" format:@"NUIPToken is abstract, and should not have name called."];
     return @"";
@@ -23,18 +23,18 @@
 
 - (NSUInteger)hash
 {
-    return [[self name] hash];
+    return [[self CERName] hash];
 }
 
 - (BOOL)isEqual:(id)object
 {
     return ([object isToken] &&
-            [[self name] isEqualToString:[(NUIPToken *)object name]]);
+            [[self CERName] isEqualToString:[(NUIPToken *)object CERName]]);
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@>", [self name]];
+    return [NSString stringWithFormat:@"<%@>", [self CERName]];
 }
 
 @end

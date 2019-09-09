@@ -51,9 +51,9 @@
                     NUIPGrammarSymbol *next = [item nextSymbol];
                     if (nil == next)
                     {
-                        if ([[[item rule] name] isEqualToString:startSymbol])
+                        if ([[[item rule] CERName] isEqualToString:startSymbol])
                         {
-                            BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction acceptAction] forState:idx name:@"EOF"];
+                            BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction acceptAction] forState:idx CERName:@"EOF"];
                             if (!success)
                             {
                                 NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, @"EOF");
@@ -62,10 +62,10 @@
                         }
                         else
                         {
-                            BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction reduceAction:[item rule]] forState:idx name:[[item terminal] name]];
+                            BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction reduceAction:[item rule]] forState:idx CERName:[[item terminal] CERName]];
                             if (!success)
                             {
-                                NSLog(@"Could not insert reduce in action table for state %lu, token %@", (unsigned long)idx, [[item terminal] name]);
+                                NSLog(@"Could not insert reduce in action table for state %lu, token %@", (unsigned long)idx, [[item terminal] CERName]);
                                 return NO;
                             }
                         }
@@ -85,10 +85,10 @@
                             }
                             indx++;
                         }
-                        BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction shiftAction:ix] forState:idx name:[next name]];
+                        BOOL success = [[self actionTable] setAction:[NUIPShiftReduceAction shiftAction:ix] forState:idx CERName:[next CERName]];
                         if (!success)
                         {
-                            NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, [next name]);
+                            NSLog(@"Could not insert shift in action table for state %lu, token %@", (unsigned long)idx, [next CERName]);
                             return NO;
                         }
                     }
@@ -144,7 +144,7 @@
     {
         for (NUIPItem *item in kernel)
         {
-            if ([[[item rule] name] isEqualToString:grammarStartSymbol] && 0 == [item position])
+            if ([[[item rule] CERName] isEqualToString:grammarStartSymbol] && 0 == [item position])
             {
                 NSMutableDictionary *gotoSpontaneous = [spontaneous objectForKey:kernel];
                 NSMutableSet *itemSpontaneous = [gotoSpontaneous objectForKey:item];
@@ -159,12 +159,12 @@
             NSSet *j = [aug lr1Closure:[NSSet setWithObject:[NUIPLR1Item lr1ItemWithRule:[item rule] position:[item position] terminal:[NUIPGrammarSymbol terminalWithName:uniqueName]]]];
             for (NUIPLR1Item *lr1Item in j)
             {
-                NSString *name = [[lr1Item terminal] name];
+                NSString *CERName = [[lr1Item terminal] CERName];
                 NUIPGrammarSymbol *nextSymbol = [lr1Item nextSymbol];
                 if (nil != nextSymbol)
                 {
                     NSSet *g = [aug lr0GotoKernelWithItems:[aug lr0Closure:kernel] symbol:nextSymbol];
-                    if ([uniqueName isEqualToString:name])
+                    if ([uniqueName isEqualToString:CERName])
                     {
                         NSMutableDictionary *fromKernelPropogations = [propogations objectForKey:kernel];
                         if (nil == fromKernelPropogations)
@@ -255,7 +255,7 @@
             NSSet *symbols = [kernelSymbols objectForKey:item];
             for (NUIPGrammarSymbol *symbol in symbols)
             {
-                if (nil != [symbol name])
+                if (nil != [symbol CERName])
                 {
                     [lr1Kernel addObject:[NUIPLR1Item lr1ItemWithRule:[item rule] position:[item position] terminal:symbol]];
                 }

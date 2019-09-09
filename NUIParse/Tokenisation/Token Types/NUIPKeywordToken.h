@@ -36,7 +36,7 @@
 /**
  * Initialises a keyword token with a certain name.
  *
- * @param keyword The name of the keyword found in the input stream.
+ * @param keyword The CERName of the keyword found in the input stream.
  * @return Returns a NUIPKeywordToken representing the specified keyword.
  *
  * @see tokenWithKeyword:

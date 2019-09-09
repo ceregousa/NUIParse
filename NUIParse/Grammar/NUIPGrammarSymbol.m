@@ -10,17 +10,17 @@
 
 @implementation NUIPGrammarSymbol
 
-@synthesize name;
+@synthesize CERName;
 @synthesize terminal;
 
-+ (id)nonTerminalWithName:(NSString *)name
++ (id)nonTerminalWithName:(NSString *)CERName
 {
-    return [[[self alloc] initWithName:name isTerminal:NO] autorelease];
+    return [[[self alloc] initWithName:CERName isTerminal:NO] autorelease];
 }
 
-+ (id)terminalWithName:(NSString *)name
++ (id)terminalWithName:(NSString *)CERName
 {
-    return [[[self alloc] initWithName:name isTerminal:YES] autorelease];
+    return [[[self alloc] initWithName:CERName isTerminal:YES] autorelease];
 }
 
 - (id)initWithName:(NSString *)initName isTerminal:(BOOL)isTerminal;
@@ -29,7 +29,7 @@
     
     if (nil != self)
     {
-        [self setName:initName];
+        [self setCERName:initName];
         [self setTerminal:isTerminal];
     }
     
@@ -50,7 +50,7 @@
     
     if (nil != self)
     {
-        [self setName:[aDecoder decodeObjectForKey:NUIPGrammarSymbolNameKey]];
+        [self setCERName:[aDecoder decodeObjectForKey:NUIPGrammarSymbolNameKey]];
         [self setTerminal:[aDecoder decodeBoolForKey:NUIPGrammarSymbolTerminalKey]];
     }
     
@@ -59,7 +59,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeObject:[self name] forKey:NUIPGrammarSymbolNameKey];
+    [aCoder encodeObject:[self CERName] forKey:NUIPGrammarSymbolNameKey];
     [aCoder encodeBool:[self isTerminal] forKey:NUIPGrammarSymbolTerminalKey];
 }
 
@@ -72,34 +72,34 @@
 {
     return ([object isGrammarSymbol] &&
             ((NUIPGrammarSymbol *)object)->terminal == terminal &&
-            [((NUIPGrammarSymbol *)object)->name isEqualToString:name]);
+            [((NUIPGrammarSymbol *)object)->CERName isEqualToString:CERName]);
 }
 
 - (BOOL)isEqualToGrammarSymbol:(NUIPGrammarSymbol *)object
 {
-    return (object != nil && object->terminal == terminal && [object->name isEqualToString:name]);
+    return (object != nil && object->terminal == terminal && [object->CERName isEqualToString:CERName]);
 }
 
 - (NSUInteger)hash
 {
-    return [[self name] hash];
+    return [[self CERName] hash];
 }
 
 - (NSString *)description
 {
     if ([self isTerminal])
     {
-        return [NSString stringWithFormat:@"\"%@\"", [self name]];
+        return [NSString stringWithFormat:@"\"%@\"", [self CERName]];
     }
     else
     {
-        return [NSString stringWithFormat:@"<%@>", [self name]];
+        return [NSString stringWithFormat:@"<%@>", [self CERName]];
     }
 }
 
 - (void)dealloc
 {
-    [name release];
+    [CERName release];
     
     [super dealloc];
 }

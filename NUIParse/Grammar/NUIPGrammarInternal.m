@@ -59,7 +59,7 @@
         NUIPGrammarSymbol *nextSymbol = [item nextSymbol];
         if (![nextSymbol isTerminal])
         {
-            [[self rulesForNonTerminalWithName:[nextSymbol name]] enumerateObjectsUsingBlock:^(NUIPRule *rule, NSUInteger ix, BOOL *s)
+            [[self rulesForNonTerminalWithName:[nextSymbol CERName]] enumerateObjectsUsingBlock:^(NUIPRule *rule, NSUInteger ix, BOOL *s)
              {
                  NUIPItem *newItem = [NUIPItem itemWithRule:rule position:0];
                  if (![j containsObject:newItem])
@@ -131,7 +131,7 @@
         NUIPGrammarSymbol *nextSymbol = [followingSymbols count] > 0 ? [followingSymbols objectAtIndex:0] : nil;
         if (![nextSymbol isTerminal])
         {
-            NSArray *rs = [self rulesForNonTerminalWithName:[(NUIPGrammarSymbol *)nextSymbol name]];
+            NSArray *rs = [self rulesForNonTerminalWithName:[(NUIPGrammarSymbol *)nextSymbol CERName]];
             for (NUIPRule *r in rs)
             {
                 NSArray *afterNext = [followingSymbols subarrayWithRange:NSMakeRange(1, [followingSymbols count] - 1)];
@@ -169,9 +169,9 @@
             }];
 }
 
-- (NSSet *)follow:(NSString *)name
+- (NSSet *)follow:(NSString *)CERName
 {
-    NSSet *follows = [[self followCache] objectForKey:name];
+    NSSet *follows = [[self followCache] objectForKey:CERName];
     
     if (nil == follows)
     {
@@ -182,7 +182,7 @@
             NSUInteger numElements = [rightHandSide count];
             [rightHandSide enumerateObjectsUsingBlock:^(NUIPGrammarSymbol *rhsE, NSUInteger idx, BOOL *s)
              {
-                 if (![rhsE isTerminal] && [[rhsE name] isEqualToString:name])
+                 if (![rhsE isTerminal] && [[rhsE CERName] isEqualToString:CERName])
                  {
                      if (idx + 1 < numElements)
                      {
@@ -193,16 +193,16 @@
                                                    }];
                          [f unionSet:firstMinusEmpty];
                      }
-                     else if (![[rule name] isEqualToString:name])
+                     else if (![[rule CERName] isEqualToString:CERName])
                      {
-                         [f unionSet:[self follow:[rule name]]];
+                         [f unionSet:[self follow:[rule CERName]]];
                      }
                  }
              }];
         }
         
         follows = f;
-        [[self followCache] setObject:f forKey:name];
+        [[self followCache] setObject:f forKey:CERName];
     }
     
     return follows;
@@ -225,14 +225,14 @@
     return f;
 }
 
-- (NSString *)uniqueSymbolNameBasedOnName:(NSString *)name
+- (NSString *)uniqueSymbolNameBasedOnName:(NSString *)CERName
 {
-    return [self symbolNameNotInSet:[self allSymbolNames] basedOnName:name];
+    return [self symbolNameNotInSet:[self allSymbolNames] basedOnName:CERName];
 }
 
-- (NSString *)symbolNameNotInSet:(NSSet *)symbols basedOnName:(NSString *)name
+- (NSString *)symbolNameNotInSet:(NSSet *)symbols basedOnName:(NSString *)CERName
 {
-    NSString *testName = [[name copy] autorelease];
+    NSString *testName = [[CERName copy] autorelease];
     while ([symbols containsObject:testName])
     {
         testName = [NSString stringWithFormat:@"_%@", testName];
@@ -259,9 +259,9 @@
         [rhsElements unionSet:[self collectRHSElementsForNewRules:[r rightHandSideElements]]];
     }
     
-    NSDictionary *names = [self nameNewRules:rhsElements withRules:oldRules];
+    NSDictionary *CERNames = [self CERNameNewRules:rhsElements withRules:oldRules];
     
-    return [self addRHSRules:names toRules:oldRules];
+    return [self addRHSRules:CERNames toRules:oldRules];
 }
 
 - (NSError *)checkRulesForErrors:(NSArray *)rules
@@ -287,7 +287,7 @@
                     return [NSError errorWithDomain:NUIPEBNFParserErrorDomain
                                                code:NUIPErrorCodeDuplicateTag
                                            userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                     [NSString stringWithFormat:@"Duplicate tag names %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, rule], NSLocalizedDescriptionKey,
+                                                     [NSString stringWithFormat:@"Duplicate tag CERNames %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, rule], NSLocalizedDescriptionKey,
                                                      nil]];
                 }
                 [tagNames unionSet:newTagNames];
@@ -301,7 +301,7 @@
                         return [NSError errorWithDomain:NUIPEBNFParserErrorDomain
                                                    code:NUIPErrorCodeDuplicateTag
                                                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                         [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", intersection, rule], NSLocalizedDescriptionKey,
+                                                         [NSString stringWithFormat:@"Duplicate tag CERNames (%@) in same part of alternative is not allowed in \"%@\".", intersection, rule], NSLocalizedDescriptionKey,
                                                          nil]];
                     }
                     [tagNames unionSet:tns];
@@ -330,17 +330,17 @@
     return ret;
 }
 
-- (NSDictionary *)nameNewRules:(NSSet *)rhsElements withRules:(NSArray *)oldRules
+- (NSDictionary *)CERNameNewRules:(NSSet *)rhsElements withRules:(NSArray *)oldRules
 {
     NSSet *symbolNames = [self symbolNamesInRules:oldRules];
-    NSUInteger name = 0;
-    NSMutableDictionary *namedRules = [NSMutableDictionary dictionaryWithCapacity:[rhsElements count]];
+    NSUInteger CERName = 0;
+    NSMutableDictionary *CERNamedRules = [NSMutableDictionary dictionaryWithCapacity:[rhsElements count]];
     for (NUIPRHSItem *item in rhsElements)
     {
-        [namedRules setObject:[self symbolNameNotInSet:symbolNames basedOnName:[NSString stringWithFormat:@"RHS%ld", (long)name]] forKey:item];
-        name++;
+        [CERNamedRules setObject:[self symbolNameNotInSet:symbolNames basedOnName:[NSString stringWithFormat:@"RHS%ld", (long)CERName]] forKey:item];
+        CERName++;
     }
-    return namedRules;
+    return CERNamedRules;
 }
          
 - (NSArray *)addRHSRules:(NSDictionary *)newRules toRules:(NSArray *)oldRules

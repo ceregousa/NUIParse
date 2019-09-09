@@ -232,7 +232,7 @@
     }
     @catch (NSException *e)
     {
-        if (![[e name] isEqualToString:kNUIPStopParsingException])
+        if (![[e CERName] isEqualToString:kNUIPStopParsingException])
         {
             [e raise];
         }

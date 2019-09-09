@@ -11,16 +11,16 @@
 /**
  * The NUIPToken class reperesents a token in the token stream.
  * 
- * All tokens respond to the -name message which is used to identify the token while parsing.
+ * All tokens respond to the -CERName message which is used to identify the token while parsing.
  *
  * NUIPToken is an abstract class.  NUIPTokenRegnisers should add instances of NUIPTokens concrete subclasses to their token stream.
  */
 @interface NUIPToken : NSObject
 
 /**
- * The token name.
+ * The token CERName.
  */
-@property (readonly) NSString *name;
+@property (readonly) NSString *CERName;
 
 /**
  * The line on which the token can be found.

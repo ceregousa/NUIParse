@@ -72,7 +72,7 @@
     [super dealloc];
 }
 
-- (BOOL)setAction:(NUIPShiftReduceAction *)action forState:(NSUInteger)state name:(NSString *)token
+- (BOOL)setAction:(NUIPShiftReduceAction *)action forState:(NSUInteger)state CERName:(NSString *)token
 {
     NSMutableDictionary *row = table[state];
     if (nil != [row objectForKey:token] && ![[row objectForKey:token] isEqualToShiftReduceAction:action])
@@ -85,7 +85,7 @@
 
 - (NUIPShiftReduceAction *)actionForState:(NSUInteger)state token:(NUIPToken *)token
 {
-    return [table[state] objectForKey:token.name];
+    return [table[state] objectForKey:token.CERName];
 }
 
 - (NSSet *)acceptableTokenNamesForState:(NSUInteger)state

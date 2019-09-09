@@ -122,7 +122,7 @@
         {
             if ([item isGrammarSymbol] && ![(NUIPGrammarSymbol *)item isTerminal])
             {
-                [nonTerminals addObject:[(NUIPGrammarSymbol *)item name]];
+                [nonTerminals addObject:[(NUIPGrammarSymbol *)item CERName]];
             }
             else if ([item isRHSItem])
             {
@@ -171,7 +171,7 @@
                         *err = [NSError errorWithDomain:NUIPEBNFParserErrorDomain
                                                    code:NUIPErrorCodeDuplicateTag
                                                userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                         [NSString stringWithFormat:@"Duplicate tag names %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, self], NSLocalizedDescriptionKey,
+                                                         [NSString stringWithFormat:@"Duplicate tag CERNames %@ in same part of alternative is not allowed in \"%@\".", duplicateTags, self], NSLocalizedDescriptionKey,
                                                          nil]];
                     }
                     return nil;
@@ -189,7 +189,7 @@
                             *err = [NSError errorWithDomain:NUIPEBNFParserErrorDomain
                                                        code:NUIPErrorCodeDuplicateTag
                                                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                             [NSString stringWithFormat:@"Duplicate tag names (%@) in same part of alternative is not allowed in \"%@\".", intersection, self], NSLocalizedDescriptionKey,
+                                                             [NSString stringWithFormat:@"Duplicate tag CERNames (%@) in same part of alternative is not allowed in \"%@\".", intersection, self], NSLocalizedDescriptionKey,
                                                              nil]];
                         }
                         return nil;
@@ -208,7 +208,7 @@
             *err = [NSError errorWithDomain:NUIPEBNFParserErrorDomain
                                        code:NUIPErrorCodeDuplicateTag
                                    userInfo:[NSDictionary dictionaryWithObjectsAndKeys:
-                                             [NSString stringWithFormat:@"Tag names are not allowed within repeating section of rule \"%@\".", self], NSLocalizedDescriptionKey,
+                                             [NSString stringWithFormat:@"Tag CERNames are not allowed within repeating section of rule \"%@\".", self], NSLocalizedDescriptionKey,
                                              nil]];
         }
         return nil;
