@@ -18,7 +18,7 @@
 @interface NUIPWhiteSpaceRecogniser : NSObject <NUIPTokenRecogniser>
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a WhiteSpace Recogniser
+/// @CERName Creating and Initialising a WhiteSpace Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**

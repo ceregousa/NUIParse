@@ -22,7 +22,7 @@
 @interface NUIPKeywordRecogniser : NSObject <NUIPTokenRecogniser>
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Keyword Recogniser
+/// @CERName Creating and Initialising a Keyword Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -76,7 +76,7 @@
 - (id)initWithKeyword:(NSString *)keyword invalidFollowingCharacters:(NSCharacterSet *)invalidFollowingCharacters;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Keyword Recogniser
+/// @CERName Configuring a Keyword Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**

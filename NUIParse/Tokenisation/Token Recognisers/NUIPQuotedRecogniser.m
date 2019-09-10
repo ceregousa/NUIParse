@@ -17,24 +17,24 @@
 @synthesize escapeSequence;
 @synthesize escapeReplacer;
 @synthesize maximumLength;
-@synthesize name;
+@synthesize CERName;
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote name:(NSString *)name
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote CERName:(NSString *)CERName
 {
-    return [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapeSequence:nil name:name];
+    return [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapeSequence:nil CERName:CERName];
 }
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence name:(NSString *)name
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence CERName:(NSString *)CERName
 {
-    return [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapeSequence:escapeSequence maximumLength:NSNotFound name:name];
+    return [NUIPQuotedRecogniser quotedRecogniserWithStartQuote:startQuote endQuote:endQuote escapeSequence:escapeSequence maximumLength:NSNotFound CERName:CERName];
 }
 
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence maximumLength:(NSUInteger)maximumLength name:(NSString *)name
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence maximumLength:(NSUInteger)maximumLength CERName:(NSString *)CERName
 {
-    return [[[NUIPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapeSequence:escapeSequence maximumLength:maximumLength name:name] autorelease];
+    return [[[NUIPQuotedRecogniser alloc] initWithStartQuote:startQuote endQuote:endQuote escapeSequence:escapeSequence maximumLength:maximumLength CERName:CERName] autorelease];
 }
 
-- (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapeSequence:(NSString *)initEscapeSequence maximumLength:(NSUInteger)initMaximumLength name:(NSString *)initName
+- (id)initWithStartQuote:(NSString *)initStartQuote endQuote:(NSString *)initEndQuote escapeSequence:(NSString *)initEscapeSequence maximumLength:(NSUInteger)initMaximumLength CERName:(NSString *)initName
 {
     self = [super init];
     
@@ -90,7 +90,7 @@
     [aCoder encodeObject:[self endQuote]       forKey:NUIPQuotedRecogniserEndQuoteKey];
     [aCoder encodeObject:[self escapeSequence] forKey:NUIPQuotedRecogniserEscapeSequenceKey];
     [aCoder encodeInteger:[self maximumLength] forKey:NUIPQuotedRecogniserMaximumLengthKey];
-    [aCoder encodeObject:[self name]           forKey:NUIPQuotedRecogniserNameKey];
+    [aCoder encodeObject:[self CERName]           forKey:NUIPQuotedRecogniserNameKey];
 }
 
 - (void)dealloc
@@ -99,7 +99,7 @@
     [endQuote release];
     [escapeSequence release];
     [escapeReplacer release];
-    [name release];
+    [CERName release];
     
     [super dealloc];
 }
@@ -135,7 +135,7 @@
                 CFStringRef substr = CFStringCreateWithSubstring(kCFAllocatorDefault, (CFStringRef)tokenString, CFRangeMake(searchRange.location, endRange.location - searchRange.location));
                 CFStringAppend(outputString, substr);
                 CFRelease(substr);
-                NUIPQuotedToken *t = [NUIPQuotedToken content:(NSString *)outputString quotedWith:startQuote name:[self name]];
+                NUIPQuotedToken *t = [NUIPQuotedToken content:(NSString *)outputString quotedWith:startQuote CERName:[self CERName]];
                 CFRelease(outputString);
                 return t;
             }

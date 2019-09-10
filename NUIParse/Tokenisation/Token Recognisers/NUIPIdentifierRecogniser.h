@@ -20,7 +20,7 @@
 @interface NUIPIdentifierRecogniser : NSObject <NUIPTokenRecogniser>
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising an Identifier Recogniser
+/// @CERName Creating and Initialising an Identifier Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -55,7 +55,7 @@
 - (id)initWithInitialCharacters:(NSCharacterSet *)initialCharacters identifierCharacters:(NSCharacterSet *)identifierCharacters;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring an Identifier Recogniser
+/// @CERName Configuring an Identifier Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**

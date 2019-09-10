@@ -71,7 +71,7 @@
  * 
  * @param parser           The parser which produced the syntax tree.
  * @param inputStream      The input stream containing the token the parser could not cope with.
- * @param acceptableTokens A set of token names that would have allowed the parser to continue in its current state.
+ * @param acceptableTokens A set of token CERNames that would have allowed the parser to continue in its current state.
  * @return An action to take to recover from the parse error or nil.  If the action is nil, and the problematic token is a NUIPErrorToken
  *         the parse stack is unwound a step for the parent rule to deal with the error.
  */
@@ -101,7 +101,7 @@ typedef struct
 }
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Parser
+/// @CERName Creating and Initialising a Parser
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -121,7 +121,7 @@ typedef struct
 - (id)initWithGrammar:(NUIPGrammar *)grammar;
 
 ///---------------------------------------------------------------------------------------
-/// @name Managing the Delegate 
+/// @CERName Managing the Delegate 
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -130,7 +130,7 @@ typedef struct
 @property (readwrite,assign, nonatomic) id<NUIPParserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
-/// @name Finding out about the parsed Grammar 
+/// @CERName Finding out about the parsed Grammar 
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -139,7 +139,7 @@ typedef struct
 @property (readonly,retain) NUIPGrammar *grammar;
 
 ///---------------------------------------------------------------------------------------
-/// @name Parsing a Token Stream.
+/// @CERName Parsing a Token Stream.
 ///---------------------------------------------------------------------------------------
 
 /**

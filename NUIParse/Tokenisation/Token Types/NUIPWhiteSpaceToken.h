@@ -13,12 +13,12 @@
 /**
  * The NUIPWhiteSpaceToken class reperesents some white space appearing in the input.
  * 
- * These tokens return `@"Whitespace"` as their name.
+ * These tokens return `@"Whitespace"` as their CERName.
  */
 @interface NUIPWhiteSpaceToken : NUIPToken
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a WhiteSpace Token
+/// @CERName Creating and Initialising a WhiteSpace Token
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -42,7 +42,7 @@
 - (id)initWithWhiteSpace:(NSString *)whiteSpace;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a WhiteSpace Token
+/// @CERName Configuring a WhiteSpace Token
 ///---------------------------------------------------------------------------------------
 
 /**

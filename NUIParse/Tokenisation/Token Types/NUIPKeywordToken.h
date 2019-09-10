@@ -15,18 +15,18 @@
  *
  * These tokens can be used to return both language keywords and predetermined operators amongst other things.
  * 
- * These tokens return the keyword name as their name.
+ * These tokens return the keyword CERName as their CERName.
  */
 @interface NUIPKeywordToken : NUIPToken
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Keyword Token
+/// @CERName Creating and Initialising a Keyword Token
 ///---------------------------------------------------------------------------------------
 
 /**
- * Creates a keyword token with a certain name.
+ * Creates a keyword token with a certain CERName.
  *
- * @param keyword The name of the keyword found in the input stream.
+ * @param keyword The CERName of the keyword found in the input stream.
  * @return Returns a NUIPKeywordToken representing the specified keyword.
  *
  * @see initWithKeyword:
@@ -34,7 +34,7 @@
 + (id)tokenWithKeyword:(NSString *)keyword;
 
 /**
- * Initialises a keyword token with a certain name.
+ * Initialises a keyword token with a certain CERName.
  *
  * @param keyword The CERName of the keyword found in the input stream.
  * @return Returns a NUIPKeywordToken representing the specified keyword.
@@ -44,11 +44,11 @@
 - (id)initWithKeyword:(NSString *)keyword;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Keyword Token
+/// @CERName Configuring a Keyword Token
 ///---------------------------------------------------------------------------------------
 
 /**
- * The name of the keyword found in the input stream.
+ * The CERName of the keyword found in the input stream.
  */
 @property (readwrite,copy) NSString *keyword;
 

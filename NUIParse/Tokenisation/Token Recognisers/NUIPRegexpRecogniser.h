@@ -23,7 +23,7 @@ typedef NUIPToken* (^NUIPRegexpKeywordRecogniserMatchHandler)(NSString* tokenStr
 @property (nonatomic, retain) NSRegularExpression* regexp;
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Regexp Keyword Recogniser
+/// @CERName Creating and Initialising a Regexp Keyword Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**

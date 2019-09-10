@@ -13,7 +13,7 @@
 /**
  * The NUIPEOFToken class reperesents the end of a token stream.
  *
- * These tokens return `@"EOF"` as their name.
+ * These tokens return `@"EOF"` as their CERName.
  */
 @interface NUIPEOFToken : NUIPToken
 

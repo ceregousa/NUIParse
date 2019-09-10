@@ -20,7 +20,7 @@
 @interface NUIPTokenStream : NSObject
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising Token Streams
+/// @CERName Creating and Initialising Token Streams
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -42,7 +42,7 @@
 - (id)initWithTokens:(NSArray *)tokens;
 
 ///---------------------------------------------------------------------------------------
-/// @name Adding and Removing Tokens
+/// @CERName Adding and Removing Tokens
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -84,7 +84,7 @@
 - (void)pushTokens:(NSArray *)tokens;
 
 ///---------------------------------------------------------------------------------------
-/// @name Finishing Tokenisation
+/// @CERName Finishing Tokenisation
 ///---------------------------------------------------------------------------------------
 
 /**

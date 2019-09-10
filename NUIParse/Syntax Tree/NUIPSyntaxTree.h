@@ -18,7 +18,7 @@
 @interface NUIPSyntaxTree : NSObject
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Syntax Tree
+/// @CERName Creating and Initialising a Syntax Tree
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -70,7 +70,7 @@
 - (id)initWithRule:(NUIPRule *)nonTerminal children:(NSArray *)children tagValues:(NSDictionary *)tagValues;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Syntax Tree
+/// @CERName Configuring a Syntax Tree
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -91,7 +91,7 @@
 /**
  * Returns the value of a specific tag.
  *
- * @param tagName The name of the tag you want the value of.
+ * @param tagName The CERName of the tag you want the value of.
  * @return The sub syntax tree associated with that tag.
  */
 - (id)valueForTag:(NSString *)tagName;

@@ -20,7 +20,7 @@
 @interface NUIPNumberRecogniser : NSObject <NUIPTokenRecogniser>
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Number Recogniser
+/// @CERName Creating and Initialising a Number Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -54,7 +54,7 @@
 + (id)numberRecogniser;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Number Recogniser
+/// @CERName Configuring a Number Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**

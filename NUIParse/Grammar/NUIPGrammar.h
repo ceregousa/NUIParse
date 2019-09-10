@@ -26,7 +26,7 @@ typedef enum
 @interface NUIPGrammar : NSObject <NSCoding>
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Grammar
+/// @CERName Creating and Initialising a Grammar
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -181,7 +181,7 @@ typedef enum
 - (id)initWithStart:(NSString *)start backusNaurForm:(NSString *)bnf error:(NSError **)error;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Grammar
+/// @CERName Configuring a Grammar
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -199,20 +199,20 @@ typedef enum
 - (void)addRule:(NUIPRule *)rule;
 
 ///---------------------------------------------------------------------------------------
-/// @name Retreiving Grammar Rules
+/// @CERName Retreiving Grammar Rules
 ///---------------------------------------------------------------------------------------
 
 /**
  * All the non-terminals that the grammar can expand.
  *
- * @return An array of non-terminal names that are explained by the grammar.
+ * @return An array of non-terminal CERNames that are explained by the grammar.
  */
 - (NSArray *)allNonTerminalNames;
 
 /**
  * The rules relevant when attempting to match a non-terminal.
  *
- * @param nonTerminalName The name of the non-terminal to find rules to match.
+ * @param nonTerminalName The CERName of the non-terminal to find rules to match.
  * @return Returns all rules that match a particular non-terminal.
  */
 - (NSArray *)rulesForNonTerminalWithName:(NSString *)nonTerminalName;

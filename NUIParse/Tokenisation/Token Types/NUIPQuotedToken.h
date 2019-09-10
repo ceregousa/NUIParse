@@ -13,12 +13,12 @@
 /**
  * The NUIPQuotedToken class reperesents a quoted literal appearing in the input.
  * 
- * These tokens return the name specified on their creation as their name.
+ * These tokens return the CERName specified on their creation as their CERName.
  */
 @interface NUIPQuotedToken : NUIPToken
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Quoted Literal Token
+/// @CERName Creating and Initialising a Quoted Literal Token
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -26,27 +26,27 @@
  *
  * @param content    The string found inside the quotes.
  * @param startQuote The symbol used to quote the content.
- * @param name       The name to use for this token.
+ * @param CERName       The CERName to use for this token.
  * @return Returns a NUIPQuotedToken representing the specified quoted literal.
  *
- * @see initWithContent:quoteType:name:
+ * @see initWithContent:quoteType:CERName:
  */
-+ (id)content:(NSString *)content quotedWith:(NSString *)startQuote name:(NSString *)name;
++ (id)content:(NSString *)content quotedWith:(NSString *)startQuote CERName:(NSString *)CERName;
 
 /**
  * Initialises a quoted literal token with the quoted literal found in the input.
  *
  * @param content    The string found inside the quotes.
  * @param startQuote The symbol used to quote the content.
- * @param name       The name to use for this token.
+ * @param CERName       The CERName to use for this token.
  * @return Returns a NUIPQuotedToken representing the specified quoted literal.
  *
- * @see content:quotedWith:name:
+ * @see content:quotedWith:CERName:
  */
-- (id)initWithContent:(NSString *)content quoteType:(NSString *)startQuote name:(NSString *)name;
+- (id)initWithContent:(NSString *)content quoteType:(NSString *)startQuote CERName:(NSString *)CERName;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Quoted Literal Token
+/// @CERName Configuring a Quoted Literal Token
 ///---------------------------------------------------------------------------------------
 
 /**

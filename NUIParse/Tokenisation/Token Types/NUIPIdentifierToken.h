@@ -13,12 +13,12 @@
 /**
  * The NUIPIdentifierToken class reperesents an identifier appearing in the input.
  * 
- * These tokens return `@"Identifier"` as their name.
+ * These tokens return `@"Identifier"` as their CERName.
  */
 @interface NUIPIdentifierToken : NUIPToken
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising an Identifier Token
+/// @CERName Creating and Initialising an Identifier Token
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -42,7 +42,7 @@
 - (id)initWithIdentifier:(NSString *)identifier;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring an Identifier Token
+/// @CERName Configuring an Identifier Token
 ///---------------------------------------------------------------------------------------
 
 /**

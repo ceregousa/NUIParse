@@ -19,12 +19,12 @@
  *
  * Finally, you may also provide a maximum length for the quoted sequence to recognise.  If you want to recognise strings of any length, pass NSNotFound.
  * 
- * This recogniser produces NUIPQuotedTokens.  The name of the produced tokens is determined by the name property.
+ * This recogniser produces NUIPQuotedTokens.  The CERName of the produced tokens is determined by the CERName property.
  */
 @interface NUIPQuotedRecogniser : NSObject <NUIPTokenRecogniser>
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Quoted Recogniser
+/// @CERName Creating and Initialising a Quoted Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -32,13 +32,13 @@
  *
  * @param startQuote A string that indicates the beginning of a quoted literal.
  * @param endQuote   A string that indicates the end of the quoted literal.
- * @param name       The name to attach to recognised tokens.
+ * @param CERName       The CERName to attach to recognised tokens.
  * @return Returns a NUIPQuotedRecogniser that recognises C like identifiers.
  *
- * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:
- * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:
+ * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:CERName:
+ * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:CERName:
  */
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote name:(NSString *)name;
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote CERName:(NSString *)CERName;
 
 /**
  * Creates a quoted recogniser that recognises quoted litterals starting with startQuote and ending with endQuote.  Escaped sequences are recognised by the escapeSequence string.
@@ -46,13 +46,13 @@
  * @param startQuote     A string that indicates the beginning of a quoted literal.
  * @param endQuote       A string that indicates the end of the quoted literal.
  * @param escapeSequence A string that indicates an escaped character.
- * @param name           The name to attach to recognised tokens.
+ * @param CERName           The CERName to attach to recognised tokens.
  * @return Returns a NUIPQuotedRecogniser that recognises C like identifiers.
  *
- * @see quotedRecogniserWithStartQuote:endQuote:name:
- * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:
+ * @see quotedRecogniserWithStartQuote:endQuote:CERName:
+ * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:CERName:
  */
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence name:(NSString *)name;
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence CERName:(NSString *)CERName;
 
 /**
  * Creates a quoted recogniser that recognises quoted litterals starting with startQuote and ending with endQuote.  Escaped sequences are recognised by the escapeSequence string.  Quoted strings have a maximum length.
@@ -61,14 +61,14 @@
  * @param endQuote       A string that indicates the end of the quoted literal.
  * @param escapeSequence A string that indicates an escaped character.
  * @param maximumLength  The maximum length of the resulting string.
- * @param name           The name to attach to recognised tokens.
+ * @param CERName           The CERName to attach to recognised tokens.
  * @return Returns a NUIPQuotedRecogniser that recognises C like identifiers.
  *
- * @see quotedRecogniserWithStartQuote:endQuote:name:
- * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:name:
- * @see initWithStartQuote:endQuote:escapeSequence:maximumLength:name:
+ * @see quotedRecogniserWithStartQuote:endQuote:CERName:
+ * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:CERName:
+ * @see initWithStartQuote:endQuote:escapeSequence:maximumLength:CERName:
  */
-+ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence maximumLength:(NSUInteger)maximumLength name:(NSString *)name;
++ (id)quotedRecogniserWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence maximumLength:(NSUInteger)maximumLength CERName:(NSString *)CERName;
 
 /**
  * Initialises a quoted recogniser that recognises quoted litterals starting with startQuote and ending with endQuote.  Escaped sequences are recognised by the escapeSequence string.  Quoted strings have a maximum length.
@@ -77,15 +77,15 @@
  * @param endQuote       A string that indicates the end of the quoted literal.
  * @param escapeSequence A string that indicates an escaped character.
  * @param maximumLength  The maximum length of the resulting string.
- * @param name           The name to attach to recognised tokens.
+ * @param CERName           The CERName to attach to recognised tokens.
  * @return Returns a NUIPQuotedRecogniser that recognises C like identifiers.
  *
- * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:name:
+ * @see quotedRecogniserWithStartQuote:endQuote:escapeSequence:maximumLength:CERName:
  */
-- (id)initWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence maximumLength:(NSUInteger)maximumLength name:(NSString *)name;
+- (id)initWithStartQuote:(NSString *)startQuote endQuote:(NSString *)endQuote escapeSequence:(NSString *)escapeSequence maximumLength:(NSUInteger)maximumLength CERName:(NSString *)CERName;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Quoted Recogniser
+/// @CERName Configuring a Quoted Recogniser
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -118,8 +118,8 @@
 @property (readwrite,assign) NSUInteger maximumLength;
 
 /**
- * Determines the name of the NUIPToken produced.
+ * Determines the CERName of the NUIPToken produced.
  */
-@property (readwrite,copy) NSString *name;
+@property (readwrite,copy) NSString *CERName;
 
 @end

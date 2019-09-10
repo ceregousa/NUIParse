@@ -13,12 +13,12 @@
 /**
  * The NUIPNumberToken class reperesents a number appearing in the input.
  * 
- * These tokens return `@"Number"` as their name.
+ * These tokens return `@"Number"` as their CERName.
  */
 @interface NUIPNumberToken : NUIPToken
 
 ///---------------------------------------------------------------------------------------
-/// @name Creating and Initialising a Number Token
+/// @CERName Creating and Initialising a Number Token
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -42,7 +42,7 @@
 - (id)initWithNumber:(NSNumber *)number;
 
 ///---------------------------------------------------------------------------------------
-/// @name Configuring a Number Token
+/// @CERName Configuring a Number Token
 ///---------------------------------------------------------------------------------------
 
 /**

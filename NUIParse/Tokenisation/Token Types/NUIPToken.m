@@ -17,7 +17,7 @@
 
 - (NSString *)CERName
 {
-    [NSException raise:@"Abstract method called exception" format:@"NUIPToken is abstract, and should not have name called."];
+    [NSException raise:@"Abstract method called exception" format:@"NUIPToken is abstract, and should not have CERName called."];
     return @"";
 }
 

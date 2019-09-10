@@ -11,7 +11,7 @@
 /**
  * The NUIPErrorToken class reperesents an error during tokenisation.
  *
- * These tokens return `@"Error"` as their name.  They may carry an error message with them.
+ * These tokens return `@"Error"` as their CERName.  They may carry an error message with them.
  */
 @interface NUIPErrorToken : NUIPToken
 

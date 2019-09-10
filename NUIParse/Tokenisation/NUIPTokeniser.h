@@ -85,7 +85,7 @@
 @interface NUIPTokeniser : NSObject <NSCoding>
 
 ///---------------------------------------------------------------------------------------
-/// @name Managing the Delegate
+/// @CERName Managing the Delegate
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -94,7 +94,7 @@
 @property (readwrite, assign, nonatomic) id<NUIPTokeniserDelegate> delegate;
 
 ///---------------------------------------------------------------------------------------
-/// @name Managing recognised tokens
+/// @CERName Managing recognised tokens
 ///---------------------------------------------------------------------------------------
 
 /**
@@ -143,7 +143,7 @@
 - (void)removeTokenRecogniser:(id<NUIPTokenRecogniser>)recogniser;
 
 ///---------------------------------------------------------------------------------------
-/// @name Tokenising
+/// @CERName Tokenising
 ///---------------------------------------------------------------------------------------
 
 /**
